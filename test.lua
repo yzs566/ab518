@@ -1170,7 +1170,6 @@ function GameBug.FireBug(logline)
                 GameBug.BydrGameData.bugfish = #fishlist;
                 if #fishlist > 2 then
                     GameBug.BydrGameData.bugfire = GameBug.BydrGameData.bugfire +1;
-
                     GameBug.BydrGameData.player:Fire();
                     coroutine.wait(0.1);
                     local serverProto = BydrFightProto_pb.FireResultRequest()
