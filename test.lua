@@ -6,7 +6,7 @@ if GameBug == nil then
     GameBug.bugLog = {"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
     GameBug.GameUpdateFun = {};
     GameBug.ver = "Ver.0.01";
-    local image = GameObject.Find("Global_UI/Canvas/TopMask").transform:GetComponent("Image")
+    local image = GameObject.Find("Global_UI/Canvas/TopMask").transform:GetComponent("Image");
     image.raycastTarget = true;
 end
 local descriptor = require "protobuf.descriptor"
