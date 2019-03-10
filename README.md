@@ -1,15 +1,10 @@
-
 UnityEngine.QualitySettings.SetQualityLevel(1);
 UnityEngine.Time.timeScale = 1;
-if GameBug == nil then
-    GameBug = {};
-    GameBug.bugButten = {};
-    GameBug.bugLog = {"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
-    GameBug.GameUpdateFun = {};
-    GameBug.ver = "Ver.0.01";
-    local image = GameObject.Find("Global_UI/Canvas/TopMask").transform:GetComponent("Image");
-    image.raycastTarget = true;
-end
+GameBug = {};
+GameBug.ver = "Ver.0.01";
+GameBug.bugButten = {};
+GameBug.bugLog = {"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
+GameBug.GameUpdateFun = {};
 local descriptor = require "protobuf.descriptor"
 local FieldDescriptor = descriptor.FieldDescriptor
 function msg2table(msg, t)
@@ -51,16 +46,21 @@ function GameBug.Update()
     if UserData.sid == nil then
         return;
     end
-    GameBug.myGold = (UserData.GetGold()/10000);
-    GameBug.bugLog[1] = GameBug.ver.."\nGold="..GameBug.myGold.."\n"..GameDataConst.enterGameName;
-    if GameDataConst.enterGameName == "" then
-        GameBug.bugButten = {};
-        GameBug.GameUpdateFun = {};
-        CtrlManager.Close(CtrlNames.WindowMask);
+    if GameBug.enterGameName ~= GameDataConst.enterGameName then
+        if GameDataConst.enterGameName == "" then
+            CtrlManager.Close(CtrlNames.WindowMask);
+            GameBug.bugButten = {};
+            GameBug.bugLog = {"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
+            GameBug.GameUpdateFun = {};
+        else
+            GameBug.bugButten[1] = "LoadScript";
+        end
+        GameBug.enterGameName = GameDataConst.enterGameName;
     else
-        GameBug.bugButten[1] = GameDataConst.enterGameName;
+        GameBug.myGold = (UserData.GetGold()/10000);
+        GameBug.bugLog[1] = GameBug.ver.."\nGold="..GameBug.myGold.."\n"..GameDataConst.enterGameName;
     end
-    if GameBug.GameUpdateFun ~= #GameBug.GameUpdateFun then
+    if 0 ~= #GameBug.GameUpdateFun then
         for k, v in pairs(GameBug.GameUpdateFun) do
             if v ~= nil then
     -- DebugLog.LogError("--------GameBug.Update()------------"..k)
@@ -69,8 +69,9 @@ function GameBug.Update()
         end
     end
 end
-function GameBug.LoadGame(logline)
-    local www = ExWWW.WWW(string.gsub( AppConst.luaAsset , "test.lua", string.lower(GameDataConst.enterGameName)..".lua" ));
+function GameBug.LoadScript(logline)
+    local url = string.gsub( AppConst.luaAsset , "test.lua", string.lower(GameDataConst.enterGameName)..".lua" );
+    local www = ExWWW.WWW(url);
     coroutine.start(
     function()
         coroutine.www(www);
