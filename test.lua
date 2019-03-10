@@ -1,4 +1,3 @@
-
 UnityEngine.QualitySettings.SetQualityLevel(1);
 UnityEngine.Time.timeScale = 1;
 if GameBug == nil then
@@ -1158,7 +1157,6 @@ function GameBug.FireBug(logline)
         GameBug.BydrGameData.co = coroutine.start(function()
             while true do
                 GameBug.bugLog[logline] = "bugfire = "..GameBug.BydrGameData.bugfire.."\nbugfish = "..GameBug.BydrGameData.bugfish;
-                
                 local reFish = BydrFishMgr:GetFishZhadan();
                 local fishlist = {};
                 for i=1, #reFish do
