@@ -1,18 +1,14 @@
-
 UnityEngine.QualitySettings.SetQualityLevel(1);
 UnityEngine.Time.timeScale = 1;
-
 if GameBug == nil then
     GameBug = {};
     GameBug.bugButten = {};
     GameBug.bugLog = {"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
     GameBug.GameUpdateFun = {};
     GameBug.ver = "Ver.0.01";
-    
     local image = GameObject.Find("Global_UI/Canvas/TopMask").transform:GetComponent("Image")
     image.raycastTarget = true;
 end
-
 local descriptor = require "protobuf.descriptor"
 local FieldDescriptor = descriptor.FieldDescriptor
 function msg2table(msg, t)
@@ -49,9 +45,7 @@ function msg2table(msg, t)
     internal(t, msg)
     return t;
 end
-
 DebugLog.LogError("--------读取lua脚本------------")
-
 function GameBug.Update()
     if UserData.sid == nil then
         return;
@@ -74,7 +68,6 @@ function GameBug.Update()
         end
     end
 end
-
 function GameBug.DxTGame(logline)
     local mask = CtrlManager.Show(CtrlNames.WindowMask,4);
     local image = mask.transform:GetComponent("Image")
@@ -196,7 +189,6 @@ function GameBug.DxTGame(logline)
             end
         end
     end );
-
     Event.RemoveListener(tostring(DxTMid_pb.GetRoomInfoResMid));
     Event.AddListener(tostring(DxTMid_pb.GetRoomInfoResMid), function(args)
         local data = args:ReadBuffer();
@@ -217,9 +209,7 @@ function GameBug.DxTGame(logline)
             end);
         end
     end );
-    
     DebugLog.LogError("--------注入脚本成功------------"..CtrlNames.DTFightMain)
-
     GameBug.bugButten[2] = "DxtDetector";
     GameBug.bugButten[3] = "DxTRotV2";
     GameBug.bugButten[4] = "DxTRotV3";
@@ -227,7 +217,6 @@ function GameBug.DxTGame(logline)
     GameBug.bugButten[6] = "DxTRotV5";
     GameBug.bugButten[7] = "AutoBet";
 end
-
 function GameBug.AutoBet(logline)
     local ainame = "ai600";
     local logline = 41;
@@ -267,7 +256,6 @@ function GameBug.AutoBet(logline)
         end
     end
 end
-
 function GameBug.DxTAI01(ainame)
     if GameBug.DxTGameData.roomState == 1 and GameBug.DxTGameData[ainame].State == 0 then
         GameBug.DxTGameData[ainame].State = 1;
@@ -318,7 +306,6 @@ function GameBug.DxTAI01(ainame)
         end
     end
 end
-
 function GameBug.DxTAI02(ainame)
     if GameBug.DxTGameData.roomState == 1 and GameBug.DxTGameData[ainame].State == 0 then
         GameBug.DxTGameData[ainame].State = 1;
@@ -382,7 +369,6 @@ function GameBug.DxTAI02(ainame)
         end
     end
 end
-
 function GameBug.DxTAI03(ainame)
     if GameBug.DxTGameData.roomState == 1 then
         if GameBug.DxTGameData[ainame].Learn == nil then
@@ -435,7 +421,6 @@ function GameBug.DxTAI03(ainame)
         GameBug.DxTGameData[ainame].LearnAiFun(ainame);
     end
 end
-
 function GameBug.DxTAI04(ainame)
     if GameBug.DxTGameData.roomState == 1 then
         if GameBug.DxTGameData[ainame].Learn == nil then
@@ -495,7 +480,6 @@ function GameBug.DxTAI04(ainame)
         GameBug.DxTGameData[ainame].LearnAiFun(ainame);
     end
 end
-
 function GameBug.DxTAI05(ainame)
     if GameBug.DxTGameData.roomState == 1 then
         if GameBug.DxTGameData[ainame].Learn == nil then
@@ -548,7 +532,6 @@ function GameBug.DxTAI05(ainame)
         GameBug.DxTGameData[ainame].LearnAiFun(ainame);
     end
 end
-
 function GameBug.InitRotAI(ainame,logline,ailv)
     if GameBug.GameUpdateFun[ainame] ~= nil then
         GameBug.GameUpdateFun[ainame] = nil;
@@ -586,7 +569,6 @@ function GameBug.InitRotAI(ainame,logline,ailv)
         table.insert(GameBug.DxTGameData.RotList, GameBug.DxTGameData[ainame])
     end
 end
-
 function GameBug.DxTRotLw2(logline)
     local ainame = "ai01";
     GameBug.DxTGameData[ainame] = {};
@@ -597,7 +579,6 @@ function GameBug.DxTRotLw2(logline)
     GameBug.DxTGameData[ainame].GiveUp = 2;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotHw2(logline)
     local ainame = "ai02";
     GameBug.DxTGameData[ainame] = {};
@@ -608,7 +589,6 @@ function GameBug.DxTRotHw2(logline)
     GameBug.DxTGameData[ainame].GiveUp = 2;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotLw3(logline)
     local ainame = "ai03";
     GameBug.DxTGameData[ainame] = {};
@@ -619,7 +599,6 @@ function GameBug.DxTRotLw3(logline)
     GameBug.DxTGameData[ainame].GiveUp = 3;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotHw3(logline)
     local ainame = "ai04";
     GameBug.DxTGameData[ainame] = {};
@@ -630,7 +609,6 @@ function GameBug.DxTRotHw3(logline)
     GameBug.DxTGameData[ainame].GiveUp = 3;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotDw2(logline)
     local ainame = "ai05";
     GameBug.DxTGameData[ainame] = {};
@@ -642,7 +620,6 @@ function GameBug.DxTRotDw2(logline)
     GameBug.DxTGameData[ainame].GiveUp = 2;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotSw2(logline)
     local ainame = "ai06";
     GameBug.DxTGameData[ainame] = {};
@@ -654,7 +631,6 @@ function GameBug.DxTRotSw2(logline)
     GameBug.DxTGameData[ainame].GiveUp = 2;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotDw3(logline)
     local ainame = "ai07";
     GameBug.DxTGameData[ainame] = {};
@@ -666,7 +642,6 @@ function GameBug.DxTRotDw3(logline)
     GameBug.DxTGameData[ainame].GiveUp = 3;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotSw3(logline)
     local ainame = "ai08";
     GameBug.DxTGameData[ainame] = {};
@@ -678,7 +653,6 @@ function GameBug.DxTRotSw3(logline)
     GameBug.DxTGameData[ainame].GiveUp = 3;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotLH1(logline)
     local ainame = "ai09";
     GameBug.DxTGameData[ainame] = {};
@@ -689,7 +663,6 @@ function GameBug.DxTRotLH1(logline)
     GameBug.DxTGameData[ainame].GiveUp = 1;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotDS1(logline)
     local ainame = "ai10";
     GameBug.DxTGameData[ainame] = {};
@@ -701,7 +674,6 @@ function GameBug.DxTRotDS1(logline)
     GameBug.DxTGameData[ainame].GiveUp = 1;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxtDetector(logline)
     GameBug.DxTRotLw2(3);
     GameBug.DxTRotHw2(4);
@@ -732,7 +704,6 @@ function GameBug.DxtDetector(logline)
             end);
     end
 end
-
 function GameBug.DxTRotV201(logline)
     local ainame = "ai201";
     GameBug.DxTGameData[ainame] = {};
@@ -744,7 +715,6 @@ function GameBug.DxTRotV201(logline)
     GameBug.DxTGameData[ainame].MaxBet = 55;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV202(logline)
     local ainame = "ai202";
     GameBug.DxTGameData[ainame] = {};
@@ -756,7 +726,6 @@ function GameBug.DxTRotV202(logline)
     GameBug.DxTGameData[ainame].MaxBet = 55;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV203(logline)
     local ainame = "ai203";
     GameBug.DxTGameData[ainame] = {};
@@ -769,7 +738,6 @@ function GameBug.DxTRotV203(logline)
     GameBug.DxTGameData[ainame].MaxBet = 55;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV204(logline)
     local ainame = "ai204";
     GameBug.DxTGameData[ainame] = {};
@@ -782,7 +750,6 @@ function GameBug.DxTRotV204(logline)
     GameBug.DxTGameData[ainame].MaxBet = 55;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV205(logline)
     local ainame = "ai205";
     GameBug.DxTGameData[ainame] = {};
@@ -794,7 +761,6 @@ function GameBug.DxTRotV205(logline)
     GameBug.DxTGameData[ainame].MaxBet = 55;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV206(logline)
     local ainame = "ai206";
     GameBug.DxTGameData[ainame] = {};
@@ -806,7 +772,6 @@ function GameBug.DxTRotV206(logline)
     GameBug.DxTGameData[ainame].MaxBet = 55;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV207(logline)
     local ainame = "ai207";
     GameBug.DxTGameData[ainame] = {};
@@ -819,7 +784,6 @@ function GameBug.DxTRotV207(logline)
     GameBug.DxTGameData[ainame].MaxBet = 55;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV208(logline)
     local ainame = "ai208";
     GameBug.DxTGameData[ainame] = {};
@@ -832,7 +796,6 @@ function GameBug.DxTRotV208(logline)
     GameBug.DxTGameData[ainame].MaxBet = 55;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV301(logline)
     local ainame = "ai301";
     GameBug.DxTGameData[ainame] = {};
@@ -844,7 +807,6 @@ function GameBug.DxTRotV301(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV302(logline)
     local ainame = "ai302";
     GameBug.DxTGameData[ainame] = {};
@@ -856,7 +818,6 @@ function GameBug.DxTRotV302(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV303(logline)
     local ainame = "ai303";
     GameBug.DxTGameData[ainame] = {};
@@ -869,7 +830,6 @@ function GameBug.DxTRotV303(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV304(logline)
     local ainame = "ai304";
     GameBug.DxTGameData[ainame] = {};
@@ -882,7 +842,6 @@ function GameBug.DxTRotV304(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV305(logline)
     local ainame = "ai305";
     GameBug.DxTGameData[ainame] = {};
@@ -894,7 +853,6 @@ function GameBug.DxTRotV305(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV306(logline)
     local ainame = "ai306";
     GameBug.DxTGameData[ainame] = {};
@@ -906,7 +864,6 @@ function GameBug.DxTRotV306(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV307(logline)
     local ainame = "ai307";
     GameBug.DxTGameData[ainame] = {};
@@ -919,7 +876,6 @@ function GameBug.DxTRotV307(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV308(logline)
     local ainame = "ai308";
     GameBug.DxTGameData[ainame] = {};
@@ -932,7 +888,6 @@ function GameBug.DxTRotV308(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV403(logline)
     local ainame = "ai403";
     GameBug.DxTGameData[ainame] = {};
@@ -945,7 +900,6 @@ function GameBug.DxTRotV403(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV404(logline)
     local ainame = "ai404";
     GameBug.DxTGameData[ainame] = {};
@@ -958,7 +912,6 @@ function GameBug.DxTRotV404(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV405(logline)
     local ainame = "ai405";
     GameBug.DxTGameData[ainame] = {};
@@ -971,7 +924,6 @@ function GameBug.DxTRotV405(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV406(logline)
     local ainame = "ai406";
     GameBug.DxTGameData[ainame] = {};
@@ -984,7 +936,6 @@ function GameBug.DxTRotV406(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV407(logline)
     local ainame = "ai407";
     GameBug.DxTGameData[ainame] = {};
@@ -996,7 +947,6 @@ function GameBug.DxTRotV407(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV408(logline)
     local ainame = "ai408";
     GameBug.DxTGameData[ainame] = {};
@@ -1008,7 +958,6 @@ function GameBug.DxTRotV408(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV503(logline)
     local ainame = "ai503";
     GameBug.DxTGameData[ainame] = {};
@@ -1021,7 +970,6 @@ function GameBug.DxTRotV503(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV504(logline)
     local ainame = "ai504";
     GameBug.DxTGameData[ainame] = {};
@@ -1034,7 +982,6 @@ function GameBug.DxTRotV504(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV505(logline)
     local ainame = "ai505";
     GameBug.DxTGameData[ainame] = {};
@@ -1047,7 +994,6 @@ function GameBug.DxTRotV505(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV506(logline)
     local ainame = "ai506";
     GameBug.DxTGameData[ainame] = {};
@@ -1060,7 +1006,6 @@ function GameBug.DxTRotV506(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV507(logline)
     local ainame = "ai507";
     GameBug.DxTGameData[ainame] = {};
@@ -1072,7 +1017,6 @@ function GameBug.DxTRotV507(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV508(logline)
     local ainame = "ai508";
     GameBug.DxTGameData[ainame] = {};
@@ -1084,7 +1028,6 @@ function GameBug.DxTRotV508(logline)
     GameBug.DxTGameData[ainame].MaxBet = 7;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV600(logline)
     local ainame = "ai600";
     GameBug.DxTGameData[ainame] = {};
@@ -1097,7 +1040,6 @@ function GameBug.DxTRotV600(logline)
     GameBug.DxTGameData[ainame].MaxBet = 6;
     GameBug.InitRotAI(ainame,logline);
 end
-
 function GameBug.DxTRotV2(logline)
     GameBug.DxTRotV208(23)
     GameBug.DxTRotV207(24)
@@ -1108,7 +1050,6 @@ function GameBug.DxTRotV2(logline)
     -- GameBug.DxTRotV202(29)
     -- GameBug.DxTRotV201(30)
 end
-
 function GameBug.DxTRotV3(logline)
     -- GameBug.DxTRotV301(43)
     -- GameBug.DxTRotV302(44)
@@ -1119,7 +1060,6 @@ function GameBug.DxTRotV3(logline)
     GameBug.DxTRotV307(49)
     GameBug.DxTRotV308(50)
 end
-
 function GameBug.DxTRotV4(logline)
     GameBug.DxTRotV403(63)
     GameBug.DxTRotV404(64)
@@ -1128,7 +1068,6 @@ function GameBug.DxTRotV4(logline)
     -- GameBug.DxTRotV407(67)
     -- GameBug.DxTRotV408(68)
 end
-
 function GameBug.DxTRotV5(logline)
     GameBug.DxTRotV503(83)
     GameBug.DxTRotV504(84)
@@ -1138,7 +1077,6 @@ function GameBug.DxTRotV5(logline)
     -- GameBug.DxTRotV508(88)
     GameBug.DxTRotV600(90)
 end
-
 function GameBug.ShzGame()
     -- body
 end
@@ -1163,7 +1101,6 @@ function GameBug.SlotsFruitGame()
     -- buffer:WriteBuffer(sendMsg);
     -- networkMgr:SendMessage(buffer);
 end
-
 function GameBug.BydrGame(logline)
     GameBug.BydrGameData = {};
     GameBug.bugButten[2] = "FireBug";
@@ -1207,7 +1144,6 @@ function GameBug.BydrGame(logline)
         GameBug.bugLog[logline] = "roomInfo = "..GameBug.BydrGameData.gamectrl.roomInfo.num;
     end
 end
-
 function GameBug.FireBug(logline)
     if GameBug.BydrGameData.co ~= nil then
         coroutine.stop(GameBug.BydrGameData.co)
@@ -1263,7 +1199,6 @@ function GameBug.FireBug(logline)
         end);
     end
 end
-
 function GameBug.EcityGame()
     -- body
 end
@@ -1290,10 +1225,6 @@ end
 function GameBug.SicBoGame()
     -- body
 end
-
 --852+67645770
 -- http://client.cdn.gam855.com/android_01/Android_518GamesCity/Android_GameLoadFile_ZJ.xml
 -- http://client.cdn.gam855.com/ios/IOS_518GamesCity/IOS_GameLoadFile_ZJ.xml
-
-
-
