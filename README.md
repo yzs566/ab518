@@ -5,42 +5,6 @@ GameBug.ver = "Ver_0_01";
 GameBug.bugButten = {};
 GameBug.bugLog = {"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
 GameBug.GameUpdateFun = {};
-local descriptor = require "protobuf.descriptor";
-local FieldDescriptor = descriptor.FieldDescriptor;
-function msg2table(msg, t)
-    if t == nil then
-        t = {};
-    end
-    local function internal(tal, msg)
-        if msg._listener_for_children then
-            for field, value in msg:ListFields() do
-                local name = field.name;
-                if field.label == FieldDescriptor.LABEL_REPEATED then
-                    tal[name] = {};
-                    internal(tal[name], value);
-                else
-                    if field.type == FieldDescriptor.TYPE_MESSAGE then
-                        tal[name] = {};
-                        internal(tal[name], value);
-                    else
-                        tal[name] = value;
-                    end
-                end
-            end
-        else
-            for field, value in ipairs(msg) do
-                if type(value) == "table" then
-                    tal[field] = {};
-                    internal(tal[field], value);
-                else
-                    tal[field] = value;
-                end
-            end
-        end
-    end
-    internal(t, msg);
-    return t;
-end
 DebugLog.LogError("--------读取lua脚本------------");
 function GameBug.Update()
     if UserData.sid == nil then
