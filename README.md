@@ -22,7 +22,7 @@ function GameBug.Update()
         GameBug.enterGameName = GameDataConst.enterGameName;
     else
         GameBug.myGold = (UserData.GetGold()/10000);
-        GameBug.bugLog[1] = GameBug.ver.."\mGold="..GameBug.myGold.."\m"..GameDataConst.enterGameName;
+        GameBug.bugLog[1] = GameBug.ver.."Gold="..GameBug.myGold..""..GameDataConst.enterGameName;
     end
     if 0 ~= #GameBug.GameUpdateFun then
         for k, v in pairs(GameBug.GameUpdateFun) do
