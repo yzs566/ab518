@@ -1,3 +1,4 @@
+
 UnityEngine.QualitySettings.SetQualityLevel(1);
 UnityEngine.Time.timeScale = 1;
 if GameBug == nil then
@@ -251,7 +252,6 @@ function GameBug.AutoBet(logline)
             elseif GameBug.DxTGameData[ainame].State == 4  then
     DebugLog.LogError("--------GameBug.AutoBet()------State == 4------")
             end
-
             GameBug.bugLog[logline] = "Gold="..GameBug.DxTGameData[ainame].Gold.."\nDxT="..GameBug.DxTGameData[ainame].Table.."\nCurbet="..GameBug.DxTGameData[ainame].Curbet.."\nState="..GameBug.DxTGameData[ainame].State.."\nWin="..GameBug.DxTGameData[ainame].CurWin.."\nRound="..GameBug.DxTGameData[ainame].Round.."\nAi="..GameBug.DxTGameData[ainame].AiName.."\nBankruptcy="..GameBug.DxTGameData[ainame].Bankruptcy
         end
     end
